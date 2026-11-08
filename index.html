@@ -17,20 +17,7 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Prompt', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
-                            800: '#166534',
-                            900: '#14532d',
-                        }
-                    }
+                    fontFamily: { sans: ['Prompt', 'sans-serif'] }
                 }
             }
         }
@@ -39,7 +26,6 @@
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
 <body class="bg-slate-900 font-sans antialiased text-slate-800 min-h-screen flex items-center justify-center p-0 sm:p-4">
@@ -75,17 +61,15 @@
 
             <!-- 1. HOME SCREEN -->
             <section id="screen-home" class="p-5 flex flex-col gap-6">
-                <!-- Banner -->
                 <div class="relative rounded-3xl overflow-hidden bg-emerald-900 text-white p-6 shadow-xl">
                     <img src="https://images.unsplash.com/photo-1470058869958-2a77ade41c02?auto=format&fit=crop&w=800&q=80" alt="Plant Banner" class="absolute inset-0 w-full h-full object-cover opacity-30">
                     <div class="relative z-10">
-                        <span class="inline-block bg-white/20 backdrop-blur-md text-xs px-3 py-1 rounded-full text-emerald-100 font-medium mb-2">Welcome Store</span>
+                        <span class="inline-block bg-white/20 backdrop-blur-md text-xs px-3 py-1 rounded-full text-emerald-100 font-medium mb-2">Realtime Cloud Store</span>
                         <h2 class="text-2xl font-bold mb-1">ยินดีต้อนรับสู่ธรรมชาติ</h2>
-                        <p class="text-xs text-emerald-100 font-light">เลือกซื้อหรือจัดการสินค้ากระถางและต้นไม้ของคุณ</p>
+                        <p class="text-xs text-emerald-100 font-light">ข้อมูลสินค้าเชื่อมต่อกันทุกเครื่องแบบ Realtime</p>
                     </div>
                 </div>
 
-                <!-- Title & Add Quick Action -->
                 <div class="flex items-center justify-between">
                     <div>
                         <h3 class="text-lg font-bold text-slate-800">เลือกประเภทสินค้า</h3>
@@ -96,10 +80,7 @@
                     </button>
                 </div>
 
-                <!-- 2 MAIN CATEGORY BUTTONS -->
                 <div class="grid grid-cols-1 gap-4">
-
-                    <!-- CATEGORY 1: ร้านกระถาง -->
                     <button onclick="openCategory('pots')" class="group text-left bg-white rounded-2xl p-4 shadow-md hover:shadow-xl border border-slate-100 transition duration-300 transform active:scale-95 flex items-center gap-4 relative overflow-hidden">
                         <div class="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 bg-amber-50">
                             <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=400&q=80" alt="ร้านกระถาง" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
@@ -115,7 +96,6 @@
                         </div>
                     </button>
 
-                    <!-- CATEGORY 2: ร้านต้นไม้ -->
                     <button onclick="openCategory('plants')" class="group text-left bg-white rounded-2xl p-4 shadow-md hover:shadow-xl border border-slate-100 transition duration-300 transform active:scale-95 flex items-center gap-4 relative overflow-hidden">
                         <div class="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 bg-emerald-50">
                             <img src="https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=400&q=80" alt="ร้านต้นไม้" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
@@ -130,9 +110,7 @@
                             <span class="inline-block text-xs font-semibold text-emerald-600 mt-2">เข้าสู่ร้านค้า →</span>
                         </div>
                     </button>
-
                 </div>
-
             </section>
 
             <!-- 2. CATEGORY PRODUCTS SCREEN -->
@@ -151,7 +129,6 @@
                     <p class="text-sm text-slate-500">ไม่พบรายการสินค้าที่ค้นหา</p>
                 </div>
             </section>
-
         </main>
 
         <!-- 3. ITEM DETAIL MODAL -->
@@ -188,11 +165,11 @@
             </div>
         </div>
 
-        <!-- 4. ADD / EDIT PRODUCT MODAL (พร้อมปุ่ม อัปโหลดรูปภาพ) -->
+        <!-- 4. ADD PRODUCT MODAL -->
         <div id="add-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
             <div class="w-full max-w-md bg-white rounded-t-3xl sm:rounded-3xl max-h-[90vh] overflow-y-auto p-6 flex flex-col gap-4">
                 <div class="flex items-center justify-between border-b pb-3">
-                    <h3 class="text-lg font-bold text-slate-800" id="add-modal-title">เพิ่มสินค้าใหม่</h3>
+                    <h3 class="text-lg font-bold text-slate-800">เพิ่มสินค้าใหม่ (Cloud Sync)</h3>
                     <button onclick="closeAddModal()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
@@ -218,12 +195,10 @@
                         </div>
                     </div>
 
-                    <!-- อัปโหลดรูปภาพจากเครื่อง (Add Image File) -->
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1">เลือกรูปภาพสินค้า (Add Image)</label>
                         <input type="file" id="input-image-file" accept="image/*" onchange="previewSelectedImage(event)" class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer">
                         
-                        <!-- ช่องแสดงตัวอย่างรูปภาพที่เลือก -->
                         <div id="image-preview-container" class="mt-2 hidden">
                             <p class="text-[10px] text-slate-400 mb-1">ตัวอย่างรูปภาพ:</p>
                             <img id="image-preview" src="" alt="Preview" class="w-full h-32 object-cover rounded-xl border border-slate-200">
@@ -232,33 +207,30 @@
 
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1">รายละเอียดสินค้า</label>
-                        <textarea id="input-desc" rows="3" placeholder="ระบุรายละเอียด เช่น ขนาด, การดูแลรักษา..." class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"></textarea>
+                        <textarea id="input-desc" rows="3" placeholder="ระบุรายละเอียด..." class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"></textarea>
                     </div>
 
                     <div class="flex items-center gap-2 pt-2">
                         <button type="button" onclick="closeAddModal()" class="w-1/3 py-2.5 border border-slate-300 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50">
                             ยกเลิก
                         </button>
-                        <button type="submit" class="w-2/3 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold shadow-md active:scale-95 transition">
-                            บันทึกสินค้า
+                        <button type="submit" id="save-btn" class="w-2/3 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold shadow-md active:scale-95 transition">
+                            บันทึกขึ้น Cloud
                         </button>
                     </div>
                 </form>
             </div>
         </div>
 
-        <!-- Floating Add Button -->
         <button onclick="openAddProductModal()" class="fixed bottom-20 right-6 sm:absolute sm:bottom-20 sm:right-6 w-12 h-12 rounded-full bg-emerald-600 text-white shadow-xl flex items-center justify-center text-xl hover:bg-emerald-700 active:scale-90 transition z-30">
             <i class="fa-solid fa-plus"></i>
         </button>
 
-        <!-- Notification Toast -->
         <div id="toast" class="absolute top-20 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs px-4 py-2.5 rounded-full shadow-xl z-50 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-2">
             <i class="fa-solid fa-circle-check text-emerald-400"></i>
             <span id="toast-text">ข้อความ</span>
         </div>
 
-        <!-- Navigation Bar -->
         <nav class="bg-white border-t border-slate-200 py-2 px-6 flex items-center justify-around sticky bottom-0 z-20">
             <button onclick="goToHome()" class="flex flex-col items-center text-emerald-600 font-medium">
                 <i class="fa-solid fa-store text-lg"></i>
@@ -273,70 +245,129 @@
                 <span class="text-[10px] mt-0.5">ร้านต้นไม้</span>
             </button>
         </nav>
-
     </div>
 
-    <!-- JavaScript App Logic -->
-    <script>
-        const initialProducts = {
-            pots: [
-                { id: 101, name: 'กระถางดินเผามินิมอล', price: 150, category: 'pots', categoryName: 'ร้านกระถาง', image: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80', desc: 'กระถางดินเผาขนาด 6 นิ้ว ดีไซน์เรียบหรู ระบายน้ำและอากาศได้ดีเยี่ยม' },
-                { id: 102, name: 'กระถางเซรามิกสีขาว', price: 290, category: 'pots', categoryName: 'ร้านกระถาง', image: 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=600&q=80', desc: 'กระถางเซรามิกเนื้อดี เคลือบเงาสีขาวสะอาดตา พร้อมจานรองเข้าชุด' }
-            ],
-            plants: [
-                { id: 201, name: 'มอนสเตอร่า (Monstera)', price: 450, category: 'plants', categoryName: 'ร้านต้นไม้', image: 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=600&q=80', desc: 'ราชินีแห่งใบไม้ ไม้ประดับฟอกอากาศยอดฮิต ใบแฉกสวยงาม เลี้ยงง่าย' },
-                { id: 202, name: 'ยางอินเดีย (Rubber Plant)', price: 390, category: 'plants', categoryName: 'ร้านต้นไม้', image: 'https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80', desc: 'ต้นไม้มงคลใบสีเขียวเข้มเงางาม ช่วยดักจับฝุ่นละอองในห้องนอน' }
-            ]
+    <!-- Firebase SDK (Version 10 Modular) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Firebase Configuration (ของคุณ)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBgx1hN5fdF7bQIoPDKXnAxBhmgvueMzIE",
+            authDomain: "green-corner-app.firebaseapp.com",
+            projectId: "green-corner-app",
+            storageBucket: "green-corner-app.firebasestorage.app",
+            messagingSenderId: "934660479363",
+            appId: "1:934660479363:web:a6ea4b4ce83b84aa377eb6",
+            measurementId: "G-7HDVR9K8JJ"
         };
 
-        let productsData = JSON.parse(localStorage.getItem('green_corner_products')) || initialProducts;
-        let currentCategory = '';
-        let selectedProduct = null;
-        let uploadedBase64Image = '';
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const productsCol = collection(db, "products");
 
-        // Elements
-        const screenHome = document.getElementById('screen-home');
-        const screenCategory = document.getElementById('screen-category');
-        const backBtn = document.getElementById('back-btn');
-        const headerTitle = document.getElementById('header-title');
-        const headerSubtitle = document.getElementById('header-subtitle');
-        const productGrid = document.getElementById('product-grid');
-        const searchInput = document.getElementById('search-input');
-        const emptyState = document.getElementById('empty-state');
+        window.productsData = { pots: [], plants: [] };
+        window.currentCategory = '';
+        window.selectedProduct = null;
+        window.uploadedBase64Image = '';
 
-        // Modal Elements
-        const detailModal = document.getElementById('detail-modal');
-        const addModal = document.getElementById('add-modal');
-        const imagePreviewContainer = document.getElementById('image-preview-container');
-        const imagePreview = document.getElementById('image-preview');
+        // ดึงข้อมูล Realtime จาก Firebase เมื่อมีการเพิ่ม/ลบ ข้อมูลจะเปลี่ยนบนทุกอุปกรณ์ทันที
+        onSnapshot(productsCol, (snapshot) => {
+            window.productsData = { pots: [], plants: [] };
+            snapshot.forEach((docSnap) => {
+                const item = { id: docSnap.id, ...docSnap.data() };
+                if (window.productsData[item.category]) {
+                    window.productsData[item.category].push(item);
+                }
+            });
 
-        function saveDataToStorage() {
-            localStorage.setItem('green_corner_products', JSON.stringify(productsData));
-        }
+            if (window.currentCategory) {
+                renderProducts(window.productsData[window.currentCategory]);
+            }
+        });
 
+        window.saveProduct = async function(e) {
+            e.preventDefault();
+            const saveBtn = document.getElementById('save-btn');
+            saveBtn.disabled = true;
+            saveBtn.textContent = 'กำลังบันทึก...';
+
+            const name = document.getElementById('input-name').value;
+            const category = document.getElementById('input-category').value;
+            const price = Number(document.getElementById('input-price').value);
+            const desc = document.getElementById('input-desc').value;
+
+            const defaultImg = category === 'pots' 
+                ? 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80'
+                : 'https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80';
+            
+            const image = window.uploadedBase64Image || defaultImg;
+
+            try {
+                await addDoc(productsCol, {
+                    name,
+                    price,
+                    category,
+                    categoryName: category === 'pots' ? 'ร้านกระถาง' : 'ร้านต้นไม้',
+                    image,
+                    desc,
+                    createdAt: Date.now()
+                });
+
+                closeAddModal();
+                alertNotification('บันทึกสินค้าลง Cloud เรียบร้อยแล้ว!');
+                openCategory(category);
+            } catch (err) {
+                alert('เกิดข้อผิดพลาดในการบันทึก: ' + err.message);
+            } finally {
+                saveBtn.disabled = false;
+                saveBtn.textContent = 'บันทึกขึ้น Cloud';
+            }
+        };
+
+        window.deleteCurrentProduct = async function() {
+            if (!window.selectedProduct) return;
+            if (confirm(`คุณต้องการลบสินค้า "${window.selectedProduct.name}" ใช่หรือไม่?`)) {
+                try {
+                    await deleteDoc(doc(db, "products", window.selectedProduct.id));
+                    closeModal();
+                    alertNotification('ลบสินค้าเรียบร้อยแล้ว');
+                } catch (err) {
+                    alert('เกิดข้อผิดพลาดในการลบ: ' + err.message);
+                }
+            }
+        };
+    </script>
+
+    <!-- UI Interaction Scripts -->
+    <script>
         function goToHome() {
-            screenCategory.classList.add('hidden');
-            screenHome.classList.remove('hidden');
-            backBtn.classList.add('hidden');
-            headerTitle.textContent = 'Green Corner';
-            headerSubtitle.textContent = 'เลือกหมวดหมู่ร้านค้าที่ต้องการ';
-            currentCategory = '';
-            searchInput.value = '';
+            document.getElementById('screen-category').classList.add('hidden');
+            document.getElementById('screen-home').classList.remove('hidden');
+            document.getElementById('back-btn').classList.add('hidden');
+            document.getElementById('header-title').textContent = 'Green Corner';
+            document.getElementById('header-subtitle').textContent = 'เลือกหมวดหมู่ร้านค้าที่ต้องการ';
+            window.currentCategory = '';
+            document.getElementById('search-input').value = '';
         }
 
         function openCategory(catKey) {
-            currentCategory = catKey;
-            backBtn.classList.remove('hidden');
-            headerTitle.textContent = catKey === 'pots' ? '1. ร้านกระถาง' : '2. ร้านต้นไม้';
-            headerSubtitle.textContent = catKey === 'pots' ? 'รายการกระถางทั้งหมด' : 'รายการต้นไม้ทั้งหมด';
+            window.currentCategory = catKey;
+            document.getElementById('back-btn').classList.remove('hidden');
+            document.getElementById('header-title').textContent = catKey === 'pots' ? '1. ร้านกระถาง' : '2. ร้านต้นไม้';
+            document.getElementById('header-subtitle').textContent = catKey === 'pots' ? 'รายการกระถางทั้งหมด' : 'รายการต้นไม้ทั้งหมด';
             
-            renderProducts(productsData[catKey] || []);
-            screenHome.classList.add('hidden');
-            screenCategory.classList.remove('hidden');
+            renderProducts(window.productsData[catKey] || []);
+            document.getElementById('screen-home').classList.add('hidden');
+            document.getElementById('screen-category').classList.remove('hidden');
         }
 
         function renderProducts(items) {
+            const productGrid = document.getElementById('product-grid');
+            const emptyState = document.getElementById('empty-state');
             productGrid.innerHTML = '';
+            
             if (!items || items.length === 0) {
                 emptyState.classList.remove('hidden');
                 return;
@@ -354,7 +385,7 @@
                     <div class="p-3 flex flex-col flex-1 justify-between">
                         <div>
                             <h4 class="font-bold text-slate-800 text-sm line-clamp-1">${item.name}</h4>
-                            <p class="text-[11px] text-slate-400 mt-0.5">${item.categoryName || (item.category === 'pots' ? 'ร้านกระถาง' : 'ร้านต้นไม้')}</p>
+                            <p class="text-[11px] text-slate-400 mt-0.5">${item.categoryName}</p>
                         </div>
                         <div class="mt-3 flex items-center justify-between">
                             <span class="text-sm font-extrabold text-emerald-600">฿${item.price}</span>
@@ -369,103 +400,71 @@
         }
 
         function filterProducts() {
-            const query = searchInput.value.toLowerCase().trim();
-            const list = productsData[currentCategory] || [];
-            const filtered = list.filter(p => p.name.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query));
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            const list = window.productsData[window.currentCategory] || [];
+            const filtered = list.filter(p => p.name.toLowerCase().includes(query) || (p.desc && p.desc.toLowerCase().includes(query)));
             renderProducts(filtered);
         }
 
         function openModal(item) {
-            selectedProduct = item;
+            window.selectedProduct = item;
             document.getElementById('modal-img').src = item.image;
             document.getElementById('modal-title').textContent = item.name;
             document.getElementById('modal-price').textContent = `฿${item.price}`;
             document.getElementById('modal-desc').textContent = item.desc || 'ไม่มีรายละเอียดสินค้าเพิ่มเติม';
-            document.getElementById('modal-tag').textContent = item.categoryName || (item.category === 'pots' ? 'ร้านกระถาง' : 'ร้านต้นไม้');
+            document.getElementById('modal-tag').textContent = item.categoryName;
 
-            detailModal.classList.remove('opacity-0', 'pointer-events-none');
-            detailModal.querySelector('div').classList.remove('translate-y-full');
+            const modal = document.getElementById('detail-modal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.remove('translate-y-full');
         }
 
         function closeModal() {
-            detailModal.querySelector('div').classList.add('translate-y-full');
-            detailModal.classList.add('opacity-0', 'pointer-events-none');
+            const modal = document.getElementById('detail-modal');
+            modal.querySelector('div').classList.add('translate-y-full');
+            modal.classList.add('opacity-0', 'pointer-events-none');
         }
 
         function openAddProductModal() {
             document.getElementById('add-product-form').reset();
-            uploadedBase64Image = '';
-            imagePreviewContainer.classList.add('hidden');
-            addModal.classList.remove('opacity-0', 'pointer-events-none');
+            window.uploadedBase64Image = '';
+            document.getElementById('image-preview-container').classList.add('hidden');
+            document.getElementById('add-modal').classList.remove('opacity-0', 'pointer-events-none');
         }
 
         function closeAddModal() {
-            addModal.classList.add('opacity-0', 'pointer-events-none');
+            document.getElementById('add-modal').classList.add('opacity-0', 'pointer-events-none');
         }
 
-        // อ่านไฟล์รูปภาพจากเครื่องแล้วแปลงเป็น Base64 Data URL
         function previewSelectedImage(event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    uploadedBase64Image = e.target.result;
-                    imagePreview.src = uploadedBase64Image;
-                    imagePreviewContainer.classList.remove('hidden');
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        const maxWidth = 500;
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > maxWidth) {
+                            height = Math.round((height * maxWidth) / width);
+                            width = maxWidth;
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+                        ctx.drawImage(img, 0, 0, width, height);
+                        window.uploadedBase64Image = canvas.toDataURL('image/jpeg', 0.6);
+                        
+                        document.getElementById('image-preview').src = window.uploadedBase64Image;
+                        document.getElementById('image-preview-container').classList.remove('hidden');
+                    };
+                    img.src = e.target.result;
                 };
                 reader.readAsDataURL(file);
-            }
-        }
-
-        // บันทึกสินค้าใหม่
-        function saveProduct(e) {
-            e.preventDefault();
-            const name = document.getElementById('input-name').value;
-            const category = document.getElementById('input-category').value;
-            const price = Number(document.getElementById('input-price').value);
-            const desc = document.getElementById('input-desc').value;
-
-            // หากผู้ใช้อัปโหลดรูป ให้ใช้รูปที่อัปโหลด หากไม่มีให้ใช้รูปตั้งต้น
-            const defaultImg = category === 'pots' 
-                ? 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80'
-                : 'https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80';
-            
-            const image = uploadedBase64Image || defaultImg;
-
-            const newProd = {
-                id: Date.now(),
-                name,
-                price,
-                category,
-                categoryName: category === 'pots' ? 'ร้านกระถาง' : 'ร้านต้นไม้',
-                image,
-                desc
-            };
-
-            if (!productsData[category]) productsData[category] = [];
-            productsData[category].push(newProd);
-
-            saveDataToStorage();
-            closeAddModal();
-            alertNotification('เพิ่มสินค้าเรียบร้อยแล้ว!');
-
-            if (currentCategory === category) {
-                renderProducts(productsData[currentCategory]);
-            } else {
-                openCategory(category);
-            }
-        }
-
-        // ลบสินค้า
-        function deleteCurrentProduct() {
-            if (!selectedProduct) return;
-            if (confirm(`คุณต้องการลบสินค้า "${selectedProduct.name}" ใช่หรือไม่?`)) {
-                const cat = selectedProduct.category;
-                productsData[cat] = productsData[cat].filter(p => p.id !== selectedProduct.id);
-                saveDataToStorage();
-                closeModal();
-                alertNotification('ลบสินค้าเรียบร้อยแล้ว');
-                if (currentCategory) renderProducts(productsData[currentCategory]);
             }
         }
 

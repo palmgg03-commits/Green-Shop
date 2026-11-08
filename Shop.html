@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Corner - ร้านกระถาง & ต้นไม้ออนไลน๋</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Prompt & Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        earth: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            500: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 font-sans antialiased text-slate-800 min-h-screen flex items-center justify-center p-0 sm:p-4 selection:bg-brand-500 selection:text-white">
+
+    <!-- Mobile Simulator Shell -->
+    <div class="w-full max-w-md h-[100vh] sm:h-[844px] bg-slate-50 sm:rounded-[40px] shadow-2xl flex flex-col overflow-hidden relative border-0 sm:border-[8px] border-slate-800">
+
+        <!-- Top Header Navigation -->
+        <header id="app-header" class="bg-gradient-to-r from-brand-900 via-brand-800 to-emerald-700 text-white p-4 pt-6 sm:pt-4 sticky top-0 z-20 shadow-md flex items-center justify-between shrink-0">
+            <div class="flex items-center gap-3">
+                <button id="back-btn" onclick="goToHome()" class="hidden w-9 h-9 flex items-center justify-center rounded-full bg-white/15 hover:bg-white/25 active:scale-95 transition">
+                    <i class="fa-solid fa-arrow-left text-base"></i>
+                </button>
+                <div>
+                    <h1 id="header-title" class="font-bold text-lg leading-tight flex items-center gap-2">
+                        <span>Green Corner</span>
+                        <span class="text-[10px] bg-emerald-500/30 border border-emerald-300/30 px-2 py-0.5 rounded-full font-normal">v2.1</span>
+                    </h1>
+                    <p id="header-subtitle" class="text-xs text-emerald-100/80 font-light truncate max-w-[200px]">ร้านกระถางและต้นไม้ออนไลน์</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-2">
+                <!-- Add Product Button in Header -->
+                <button onclick="openAddProductModal()" class="w-9 h-9 rounded-full bg-emerald-500/30 hover:bg-emerald-500/50 border border-emerald-300/40 flex items-center justify-center text-white transition active:scale-95" title="เพิ่มสินค้า">
+                    <i class="fa-solid fa-plus text-sm"></i>
+                </button>
+
+                <!-- Cart Button Header Badge -->
+                <button onclick="toggleCartDrawer(true)" class="relative w-9 h-9 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white transition active:scale-95">
+                    <i class="fa-solid fa-cart-shopping text-sm"></i>
+                    <span id="cart-badge-count" class="hidden absolute -top-1 -right-1 bg-amber-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow">0</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Dynamic View Area -->
+        <main id="main-container" class="flex-1 overflow-y-auto relative pb-20">
+
+            <!-- 1. HOME TAB / SCREEN -->
+            <section id="screen-home" class="p-4 flex flex-col gap-5 animate-fade-in">
+                
+                <!-- Promotional Hero Banner -->
+                <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-brand-900 to-emerald-950 text-white p-5 shadow-lg border border-emerald-800/40">
+                    <img src="https://images.unsplash.com/photo-1470058869958-2a77ade41c02?auto=format&fit=crop&w=800&q=80" alt="Plant Banner" class="absolute inset-0 w-full h-full object-cover opacity-25">
+                    <div class="relative z-10 flex flex-col items-start gap-1">
+                        <span class="bg-amber-500/90 text-amber-950 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">โปรโมชั่นประจำเดือน</span>
+                        <h2 class="text-xl font-bold mt-1 leading-snug">จัดมุมโปรดในบ้าน<br><span class="text-emerald-300">ด้วยต้นไม้ & กระถางดีไซน์</span></h2>
+                        <p class="text-xs text-emerald-100/90 font-light mt-1">ส่งฟรี! เมื่อสั่งซื้อครบ 500 บาทขึ้นไป</p>
+                        <button onclick="switchTab('shop')" class="mt-3 bg-white text-emerald-900 hover:bg-emerald-50 text-xs font-bold px-4 py-2 rounded-xl shadow-md transition transform active:scale-95 flex items-center gap-1.5">
+                            <span>ช้อปเลย</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Main Quick Store Categories -->
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                            <i class="fa-solid fa-shapes text-brand-600"></i> หมวดหมู่สินค้า
+                        </h3>
+                        <button onclick="switchTab('shop')" class="text-xs text-brand-600 font-semibold hover:underline">ดูทั้งหมด →</button>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <!-- Pots Category Card -->
+                        <div onclick="openCategoryView('pots')" class="group cursor-pointer bg-white rounded-2xl p-3 shadow-sm hover:shadow-md border border-slate-200/80 transition duration-300 active:scale-95 flex flex-col justify-between">
+                            <div class="w-full h-24 rounded-xl overflow-hidden bg-amber-50 relative mb-2">
+                                <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=400&q=80" alt="ร้านกระถาง" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                <span class="absolute top-2 left-2 bg-amber-900/80 text-amber-100 text-[10px] font-semibold px-2 py-0.5 rounded-md backdrop-blur-sm">หมวดกระถาง</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-800 group-hover:text-brand-600 transition">1. ร้านกระถาง</h4>
+                                <p class="text-[11px] text-slate-500 mt-0.5 line-clamp-1">เซรามิก, ดินเผา, ปูนโมเดิร์น</p>
+                            </div>
+                        </div>
+
+                        <!-- Plants Category Card -->
+                        <div onclick="openCategoryView('plants')" class="group cursor-pointer bg-white rounded-2xl p-3 shadow-sm hover:shadow-md border border-slate-200/80 transition duration-300 active:scale-95 flex flex-col justify-between">
+                            <div class="w-full h-24 rounded-xl overflow-hidden bg-emerald-50 relative mb-2">
+                                <img src="https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=400&q=80" alt="ร้านต้นไม้" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                <span class="absolute top-2 left-2 bg-emerald-900/80 text-emerald-100 text-[10px] font-semibold px-2 py-0.5 rounded-md backdrop-blur-sm">หมวดต้นไม้</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-800 group-hover:text-brand-600 transition">2. ร้านต้นไม้</h4>
+                                <p class="text-[11px] text-slate-500 mt-0.5 line-clamp-1">ไม้ฟอกอากาศ, ไม้มงคล</p>
+                            </div>
+                        </div>
+
+                        <!-- Fertilizer & Tools Card -->
+                        <div onclick="openCategoryView('tools')" class="group cursor-pointer bg-white rounded-2xl p-3 shadow-sm hover:shadow-md border border-slate-200/80 transition duration-300 active:scale-95 flex flex-col justify-between">
+                            <div class="w-full h-24 rounded-xl overflow-hidden bg-sky-50 relative mb-2">
+                                <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=400&q=80" alt="ปุ๋ย & อุปกรณ์" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                <span class="absolute top-2 left-2 bg-sky-900/80 text-sky-100 text-[10px] font-semibold px-2 py-0.5 rounded-md backdrop-blur-sm">อุปกรณ์</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-800 group-hover:text-brand-600 transition">3. ปุ๋ย & อุปกรณ์</h4>
+                                <p class="text-[11px] text-slate-500 mt-0.5 line-clamp-1">ดินปลูก, อาหารพืช, ฟ็อกกี้</p>
+                            </div>
+                        </div>
+
+                        <!-- Combo Sets Card -->
+                        <div onclick="openCategoryView('sets')" class="group cursor-pointer bg-white rounded-2xl p-3 shadow-sm hover:shadow-md border border-slate-200/80 transition duration-300 active:scale-95 flex flex-col justify-between">
+                            <div class="w-full h-24 rounded-xl overflow-hidden bg-purple-50 relative mb-2">
+                                <img src="https://images.unsplash.com/photo-1463936575829-25148e1db1b8?auto=format&fit=crop&w=400&q=80" alt="เซ็ตสุดคุ้ม" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                <span class="absolute top-2 left-2 bg-purple-900/80 text-purple-100 text-[10px] font-semibold px-2 py-0.5 rounded-md backdrop-blur-sm">เซ็ตสุดคุ้ม</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-800 group-hover:text-brand-600 transition">4. ชุดเซ็ตจับคู่</h4>
+                                <p class="text-[11px] text-slate-500 mt-0.5 line-clamp-1">ต้นไม้พร้อมกระถางสำเร็จ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommended Items Section -->
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                            <i class="fa-solid fa-fire text-amber-500"></i> สินค้ายอดนิยม
+                        </h3>
+                        <button onclick="openAddProductModal()" class="text-xs text-brand-700 font-bold flex items-center gap-1 bg-brand-50 hover:bg-brand-100 px-2.5 py-1 rounded-lg border border-brand-200 transition">
+                            <i class="fa-solid fa-plus text-[10px]"></i> เพิ่มสินค้า
+                        </button>
+                    </div>
+                    <div id="home-featured-grid" class="grid grid-cols-2 gap-3">
+                        <!-- Dynamically filled with top rated items -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. SHOP / CATALOG TAB SCREEN -->
+            <section id="screen-shop" class="p-4 hidden animate-fade-in">
+                <!-- Search Box -->
+                <div class="mb-3 flex items-center gap-2">
+                    <div class="relative flex-1">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                        <input type="text" id="search-input" oninput="applyFilters()" placeholder="ค้นหานามต้นไม้ หรือประเภทกระถาง..." class="w-full pl-9 pr-8 py-2 bg-white rounded-xl text-xs border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-sm">
+                        <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                            <i class="fa-solid fa-circle-xmark text-xs"></i>
+                        </button>
+                    </div>
+                    <button onclick="toggleFilterDrawer(true)" class="p-2.5 bg-white border border-slate-200 rounded-xl text-slate-600 hover:text-brand-600 shadow-sm active:scale-95 transition">
+                        <i class="fa-solid fa-sliders text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Main Category Pill Filters -->
+                <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar pb-2 mb-3">
+                    <button id="cat-pill-all" onclick="setMainCategoryPill('all')" class="px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-brand-700 text-white shadow-sm transition">ทั้งหมด</button>
+                    <button id="cat-pill-pots" onclick="setMainCategoryPill('pots')" class="px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition">กระถาง</button>
+                    <button id="cat-pill-plants" onclick="setMainCategoryPill('plants')" class="px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition">ต้นไม้</button>
+                    <button id="cat-pill-tools" onclick="setMainCategoryPill('tools')" class="px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition">ปุ๋ย/อุปกรณ์</button>
+                    <button id="cat-pill-sets" onclick="setMainCategoryPill('sets')" class="px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 transition">ชุดเซ็ต</button>
+                </div>
+
+                <!-- Active Subtag filter bar (if active) -->
+                <div id="subtag-bar" class="hidden items-center justify-between bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] px-3 py-1.5 rounded-xl mb-3">
+                    <span id="subtag-label">กรองตาม: -</span>
+                    <button onclick="clearSubtagFilter()" class="font-bold underline text-emerald-900 hover:text-emerald-700">ล้างตัวกรอง</button>
+                </div>
+
+                <!-- Products Grid -->
+                <div id="product-grid" class="grid grid-cols-2 gap-3">
+                    <!-- Cards inserted by JS -->
+                </div>
+
+                <!-- Empty Search Result -->
+                <div id="empty-state" class="hidden text-center py-12">
+                    <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3 text-slate-400">
+                        <i class="fa-solid fa-seedling text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-700 text-sm">ไม่พบรายการสินค้าที่ค้นหา</h4>
+                    <p class="text-xs text-slate-400 mt-1">ลองค้นหาด้วยคำอื่น หรือล้างตัวกรองการค้นหา</p>
+                    <button onclick="resetAllFilters()" class="mt-3 px-4 py-1.5 bg-brand-600 text-white rounded-xl text-xs font-medium shadow-md">ล้างค่าการค้นหา</button>
+                </div>
+            </section>
+
+            <!-- 3. WISHLIST TAB SCREEN -->
+            <section id="screen-wishlist" class="p-4 hidden animate-fade-in">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-base font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-heart text-rose-500"></i> สินค้าที่ถูกใจ
+                    </h3>
+                    <span id="wishlist-count-label" class="text-xs text-slate-500">0 รายการ</span>
+                </div>
+
+                <div id="wishlist-grid" class="grid grid-cols-2 gap-3">
+                    <!-- Wishlist Cards inserted here -->
+                </div>
+
+                <div id="empty-wishlist" class="hidden text-center py-16">
+                    <div class="w-16 h-16 bg-rose-50 rounded-full flex items-center justify-center mx-auto mb-3 text-rose-400">
+                        <i class="fa-regular fa-heart text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-700 text-sm">ยังไม่มีรายการที่ชื่นชอบ</h4>
+                    <p class="text-xs text-slate-400 mt-1">กดไอคอนหัวใจที่สินค้าที่คุณสนใจเพื่อบันทึกเก็บไว้ดูภายหลัง</p>
+                    <button onclick="switchTab('shop')" class="mt-4 px-4 py-2 bg-brand-600 text-white rounded-xl text-xs font-semibold shadow-md active:scale-95 transition">เลือกดูสินค้า</button>
+                </div>
+            </section>
+
+            <!-- 4. ORDERS & HISTORY TAB SCREEN -->
+            <section id="screen-orders" class="p-4 hidden animate-fade-in">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-base font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-receipt text-brand-600"></i> ประวัติคำสั่งซื้อ
+                    </h3>
+                </div>
+
+                <div id="orders-list" class="flex flex-col gap-3">
+                    <!-- Orders List Inserted dynamically -->
+                </div>
+
+                <div id="empty-orders" class="text-center py-16">
+                    <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3 text-slate-400">
+                        <i class="fa-solid fa-box-open text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-700 text-sm">ยังไม่มีประวัติการสั่งซื้อ</h4>
+                    <p class="text-xs text-slate-400 mt-1">รายการสั่งซื้อที่คุณทำรายการสำเร็จจะปรากฏที่นี่</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- ITEM DETAIL MODAL -->
+        <div id="detail-modal" class="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
+            <div class="w-full max-w-md bg-white rounded-t-3xl sm:rounded-3xl max-h-[90vh] overflow-y-auto flex flex-col transform translate-y-full sm:translate-y-0 transition-transform duration-300 shadow-2xl">
+                
+                <!-- Product Header Image -->
+                <div class="relative h-64 bg-slate-100 shrink-0">
+                    <img id="modal-img" src="" alt="Product Image" class="w-full h-full object-cover">
+                    <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60 transition active:scale-90">
+                        <i class="fa-solid fa-xmark text-sm"></i>
+                    </button>
+                    <!-- Favorite Toggle Button in Modal -->
+                    <button id="modal-wishlist-btn" onclick="toggleFavoriteFromModal()" class="absolute top-4 left-4 w-9 h-9 rounded-full bg-white/90 text-slate-400 flex items-center justify-center shadow hover:scale-105 transition active:scale-90">
+                        <i class="fa-solid fa-heart text-base"></i>
+                    </button>
+                    <span id="modal-tag" class="absolute bottom-4 left-4 bg-brand-700/90 text-white text-[11px] font-medium px-3 py-1 rounded-full shadow-md backdrop-blur-sm">
+                        หมวดหมู่
+                    </span>
+                </div>
+
+                <!-- Detail Body -->
+                <div class="p-5 flex flex-col gap-4">
+                    <div>
+                        <div class="flex items-start justify-between gap-2">
+                            <h3 id="modal-title" class="text-lg font-bold text-slate-800 leading-snug">ชื่อสินค้า</h3>
+                            <span id="modal-price" class="text-xl font-black text-brand-600 shrink-0">฿0</span>
+                        </div>
+                        <p id="modal-desc" class="text-xs text-slate-600 mt-2 leading-relaxed">รายละเอียดสินค้า...</p>
+                    </div>
+
+                    <!-- Plant Care Guide Panel (Only shown if Plant category) -->
+                    <div id="modal-care-guide" class="hidden bg-emerald-50/70 border border-emerald-100 rounded-2xl p-3">
+                        <h4 class="text-xs font-bold text-emerald-900 mb-2 flex items-center gap-1.5">
+                            <i class="fa-solid fa-seedling text-brand-600"></i> คู่มือการดูแลต้นไม้
+                        </h4>
+                        <div class="grid grid-cols-3 gap-2 text-[11px]">
+                            <div class="bg-white p-2 rounded-xl border border-emerald-100 flex flex-col items-center text-center">
+                                <i class="fa-solid fa-sun text-amber-500 text-sm mb-1"></i>
+                                <span class="text-slate-500 text-[10px]">แสงแดด</span>
+                                <span id="care-sun" class="font-semibold text-slate-700 mt-0.5">แดดรำไร</span>
+                            </div>
+                            <div class="bg-white p-2 rounded-xl border border-emerald-100 flex flex-col items-center text-center">
+                                <i class="fa-solid fa-droplet text-sky-500 text-sm mb-1"></i>
+                                <span class="text-slate-500 text-[10px]">การรดน้ำ</span>
+                                <span id="care-water" class="font-semibold text-slate-700 mt-0.5">2-3 วัน/ครั้ง</span>
+                            </div>
+                            <div class="bg-white p-2 rounded-xl border border-emerald-100 flex flex-col items-center text-center">
+                                <i class="fa-solid fa-mountain text-amber-700 text-sm mb-1"></i>
+                                <span class="text-slate-500 text-[10px]">ดินปลูก</span>
+                                <span id="care-soil" class="font-semibold text-slate-700 mt-0.5">โปร่ง ระบายน้ำ</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pot Spec Panel (Shown if Pot category) -->
+                    <div id="modal-pot-spec" class="hidden bg-slate-50 border border-slate-200/80 rounded-2xl p-3">
+                        <h4 class="text-xs font-bold text-slate-700 mb-2 flex items-center gap-1.5">
+                            <i class="fa-solid fa-ruler-combined text-amber-600"></i> คุณสมบัติกระถาง
+                        </h4>
+                        <div class="grid grid-cols-2 gap-2 text-xs text-slate-600">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-[#15803d] fa-circle-check text-brand-600 text-xs"></i>
+                                <span id="pot-size">ขนาด: 6 นิ้ว</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-brand-600 text-xs"></i>
+                                <span id="pot-drain">มีรูระบายน้ำ + จานรอง</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add to Cart Action -->
+                    <div class="flex items-center gap-3 pt-2">
+                        <button onclick="addToCartCurrentModal()" class="w-2/3 py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl text-xs shadow-md shadow-brand-600/30 active:scale-95 transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            <span>ใส่ตะกร้าสินค้า</span>
+                        </button>
+                        <button id="modal-delete-btn" onclick="confirmDeleteCurrentModal()" class="w-1/3 py-3 bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 font-semibold rounded-xl text-xs active:scale-95 transition flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-trash-can"></i>
+                            <span>ลบ</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADD / EDIT PRODUCT MODAL -->
+        <div id="product-form-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
+            <div class="w-full max-w-md bg-white rounded-t-3xl sm:rounded-3xl max-h-[92vh] overflow-y-auto p-5 flex flex-col gap-4 transform translate-y-full sm:translate-y-0 transition-transform duration-300 shadow-2xl">
+                
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h3 id="form-modal-title" class="font-bold text-slate-800 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-plus-circle text-brand-600"></i> เพิ่มสินค้าใหม่ในร้าน
+                    </h3>
+                    <button onclick="closeProductFormModal()" class="text-slate-400 hover:text-slate-600">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <form id="product-form" onsubmit="handleSaveProduct(event)" class="flex flex-col gap-3 text-xs">
+                    <input type="hidden" id="form-product-id" value="">
+                    
+                    <div>
+                        <label class="font-bold text-slate-700 mb-1 block">ชื่อสินค้า *</label>
+                        <input type="text" id="form-name" required placeholder="เช่น กระถางเซรามิกญี่ปุ่น, ต้นไทรใบสัก" class="w-full p-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="font-bold text-slate-700 mb-1 block">หมวดหมู่ *</label>
+                            <select id="form-category" onchange="toggleFormCategoryFields()" class="w-full p-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                                <option value="pots">ร้านกระถาง</option>
+                                <option value="plants">ร้านต้นไม้</option>
+                                <option value="tools">ปุ๋ย & อุปกรณ์</option>
+                                <option value="sets">ชุดเซ็ตสุดคุ้ม</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700 mb-1 block">ราคา (บาท ฿) *</label>
+                            <input type="number" id="form-price" min="1" required placeholder="150" class="w-full p-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="font-bold text-slate-700 mb-1 block">URL รูปภาพสินค้า (เว้นว่างเพื่อใช้ภาพตัวอย่าง)</label>
+                        <input type="url" id="form-image" placeholder="https://images.unsplash.com/..." class="w-full p-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="font-bold text-slate-700 mb-1 block">รายละเอียดสินค้า *</label>
+                        <textarea id="form-desc" required rows="2" placeholder="อธิบายจุดเด่น การระบายน้ำ หรือสายพันธุ์..." class="w-full p-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:outline-none"></textarea>
+                    </div>
+
+                    <!-- Plant Specific Care Inputs -->
+                    <div id="form-plant-care-section" class="bg-emerald-50/80 border border-emerald-200 rounded-2xl p-3 flex flex-col gap-2">
+                        <span class="font-bold text-emerald-900 text-[11px] flex items-center gap-1">
+                            <i class="fa-solid fa-leaf text-brand-600"></i> ข้อมูลการดูแลต้นไม้
+                        </span>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div>
+                                <label class="text-[10px] text-slate-600 block mb-0.5">แสงแดด</label>
+                                <input type="text" id="form-care-sun" placeholder="แดดรำไร" class="w-full p-1.5 border border-emerald-200 rounded-lg text-[11px] bg-white">
+                            </div>
+                            <div>
+                                <label class="text-[10px] text-slate-600 block mb-0.5">การรดน้ำ</label>
+                                <input type="text" id="form-care-water" placeholder="2 วัน/ครั้ง" class="w-full p-1.5 border border-emerald-200 rounded-lg text-[11px] bg-white">
+                            </div>
+                            <div>
+                                <label class="text-[10px] text-slate-600 block mb-0.5">ดินปลูก</label>
+                                <input type="text" id="form-care-soil" placeholder="ดินร่วนโปร่ง" class="w-full p-1.5 border border-emerald-200 rounded-lg text-[11px] bg-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pot Specific Spec Inputs -->
+                    <div id="form-pot-spec-section" class="bg-amber-50/80 border border-amber-200 rounded-2xl p-3 flex flex-col gap-2">
+                        <span class="font-bold text-amber-900 text-[11px] flex items-center gap-1">
+                            <i class="fa-solid fa-fill-drip text-amber-600"></i> คุณสมบัติกระถาง
+                        </span>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="text-[10px] text-slate-600 block mb-0.5">ขนาดกระถาง</label>
+                                <input type="text" id="form-pot-size" placeholder="6 นิ้ว" class="w-full p-1.5 border border-amber-200 rounded-lg text-[11px] bg-white">
+                            </div>
+                            <div>
+                                <label class="text-[10px] text-slate-600 block mb-0.5">รูระบายน้ำ</label>
+                                <input type="text" id="form-pot-drain" placeholder="มีรูระบายน้ำ + จานรอง" class="w-full p-1.5 border border-amber-200 rounded-lg text-[11px] bg-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="font-bold text-slate-700 mb-1 block">แท็กคุณลักษณะ (คั่นด้วยเครื่องหมายจุลภาค ,)</label>
+                        <input type="text" id="form-subtags" placeholder="ฟอกอากาศ, เลี้ยงง่าย, เซรามิก" class="w-full p-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    </div>
+
+                    <div class="flex items-center gap-2 pt-2">
+                        <button type="button" onclick="closeProductFormModal()" class="w-1/3 py-2.5 border border-slate-200 text-slate-600 rounded-xl font-semibold">ยกเลิก</button>
+                        <button type="submit" class="w-2/3 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-md active:scale-95 transition">บันทึกสินค้า</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <!-- FLOATING ADD PRODUCT BUTTON (FAB) -->
+        <button onclick="openAddProductModal()" class="fixed bottom-16 right-5 sm:right-auto sm:ml-[340px] z-30 w-12 h-12 bg-brand-600 hover:bg-brand-700 text-white rounded-full shadow-xl flex items-center justify-center text-lg active:scale-90 transition border-2 border-white" title="เพิ่มสินค้าใหม่">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+
+        <!-- FILTER & SORT DRAWER SLIDE-UP -->
+        <div id="filter-drawer" class="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm flex items-end justify-center opacity-0 pointer-events-none transition-all duration-300">
+            <div class="w-full max-w-md bg-white rounded-t-3xl p-5 flex flex-col gap-4 transform translate-y-full transition-transform duration-300">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-sliders text-brand-600"></i> ตัวกรองและเรียงลำดับ
+                    </h3>
+                    <button onclick="toggleFilterDrawer(false)" class="text-slate-400 hover:text-slate-600">
+                        <i class="fa-solid fa-xmark text-base"></i>
+                    </button>
+                </div>
+
+                <!-- Sort option -->
+                <div>
+                    <label class="text-xs font-bold text-slate-700 block mb-2">เรียงลำดับตาม</label>
+                    <select id="sort-select" onchange="applyFilters()" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <option value="default">แนะนำ (ตามลำดับ)</option>
+                        <option value="price-low">ราคา: ต่ำสุด - สูงสุด</option>
+                        <option value="price-high">ราคา: สูงสุด - ต่ำสุด</option>
+                        <option value="name">ชื่อสินค้า (ก-ฮ)</option>
+                    </select>
+                </div>
+
+                <!-- Subtags -->
+                <div>
+                    <label class="text-xs font-bold text-slate-700 block mb-2">คุณลักษณะเฉพาะ</label>
+                    <div class="flex flex-wrap gap-1.5">
+                        <button onclick="toggleSubtag('ฟอกอากาศ')" class="subtag-btn border border-slate-200 px-3 py-1 rounded-full text-[11px] text-slate-600 hover:bg-emerald-50">ฟอกอากาศ</button>
+                        <button onclick="toggleSubtag('เลี้ยงง่าย')" class="subtag-btn border border-slate-200 px-3 py-1 rounded-full text-[11px] text-slate-600 hover:bg-emerald-50">เลี้ยงง่าย</button>
+                        <button onclick="toggleSubtag('ไม้มงคล')" class="subtag-btn border border-slate-200 px-3 py-1 rounded-full text-[11px] text-slate-600 hover:bg-emerald-50">ไม้มงคล</button>
+                        <button onclick="toggleSubtag('เซรามิก')" class="subtag-btn border border-slate-200 px-3 py-1 rounded-full text-[11px] text-slate-600 hover:bg-amber-50">เซรามิก</button>
+                        <button onclick="toggleSubtag('ดินเผา')" class="subtag-btn border border-slate-200 px-3 py-1 rounded-full text-[11px] text-slate-600 hover:bg-amber-50">ดินเผา</button>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2 pt-2">
+                    <button onclick="resetAllFilters(); toggleFilterDrawer(false);" class="w-1/2 py-2.5 border border-slate-200 text-slate-600 rounded-xl text-xs font-semibold">ล้างค่า</button>
+                    <button onclick="toggleFilterDrawer(false)" class="w-1/2 py-2.5 bg-brand-600 text-white rounded-xl text-xs font-semibold shadow-md">นำไปใช้</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CART DRAWER / SLIDE-OVER -->
+        <div id="cart-drawer" class="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm flex justify-end opacity-0 pointer-events-none transition-all duration-300">
+            <div class="w-full max-w-xs sm:max-w-sm bg-white h-full flex flex-col shadow-2xl transform translate-x-full transition-transform duration-300">
+                <!-- Cart Header -->
+                <div class="p-4 bg-slate-900 text-white flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-cart-shopping text-brand-500"></i>
+                        <h3 class="font-bold text-sm">ตะกร้าสินค้าของคุณ</h3>
+                    </div>
+                    <button onclick="toggleCartDrawer(false)" class="text-slate-400 hover:text-white w-7 h-7 rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Cart Items List -->
+                <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 flex flex-col gap-3">
+                    <!-- Items rendered dynamically -->
+                </div>
+
+                <!-- Cart Summary Footer -->
+                <div id="cart-footer" class="p-4 bg-slate-50 border-t border-slate-200 flex flex-col gap-2">
+                    <div class="flex items-center justify-between text-xs text-slate-600">
+                        <span>ย่อยรวม (Subtotal):</span>
+                        <span id="cart-subtotal" class="font-semibold text-slate-800">฿0</span>
+                    </div>
+                    <div class="flex items-center justify-between text-xs text-slate-600">
+                        <span>ค่าจัดส่ง (Shipping):</span>
+                        <span id="cart-shipping" class="font-semibold text-slate-800">฿40</span>
+                    </div>
+                    <div class="border-t border-slate-200 pt-2 flex items-center justify-between text-sm font-bold text-slate-900">
+                        <span>ราคารวมทั้งสิ้น:</span>
+                        <span id="cart-grandtotal" class="text-brand-600 text-base">฿0</span>
+                    </div>
+                    <button onclick="openCheckoutModal()" class="w-full mt-2 py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl text-xs shadow-md active:scale-95 transition flex items-center justify-center gap-2">
+                        <span>ดำเนินการสั่งซื้อ</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHECKOUT & PAYMENT MODAL -->
+        <div id="checkout-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
+            <div class="w-full max-w-md bg-white rounded-t-3xl sm:rounded-3xl max-h-[92vh] overflow-y-auto p-5 flex flex-col gap-4 transform translate-y-full sm:translate-y-0 transition-transform duration-300 shadow-2xl">
+                
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-truck-fast text-brand-600"></i> ชำระเงิน & ที่อยู่จัดส่ง
+                    </h3>
+                    <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-slate-600">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Form Inputs -->
+                <form id="checkout-form" onsubmit="handlePlaceOrder(event)" class="flex flex-col gap-3 text-xs">
+                    <div>
+                        <label class="font-bold text-slate-700 mb-1 block">ชื่อ-นามสกุล ผู้รับ *</label>
+                        <input type="text" id="cust-name" required placeholder="สมชาย ใจดี" class="w-full p-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="font-bold text-slate-700 mb-1 block">เบอร์โทรศัพท์ติดต่อ *</label>
+                        <input type="tel" id="cust-phone" required placeholder="081-234-5678" class="w-full p-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="font-bold text-slate-700 mb-1 block">ที่อยู่สำหรับจัดส่งสินค้า *</label>
+                        <textarea id="cust-address" required rows="2" placeholder="บ้านเลขที่ ถนน แขวง/ตำบล เขต/อำเภอ จังหวัด รหัสไปรษณีย์" class="w-full p-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:outline-none"></textarea>
+                    </div>
+
+                    <!-- Payment Method Selector -->
+                    <div>
+                        <label class="font-bold text-slate-700 mb-2 block">ช่องทางชำระเงิน</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <label class="cursor-pointer border border-slate-200 rounded-xl p-2.5 flex flex-col items-center gap-1 text-center font-medium bg-slate-50 has-[:checked]:border-brand-600 has-[:checked]:bg-brand-50 has-[:checked]:text-brand-800 transition">
+                                <input type="radio" name="payment" value="promptpay" checked onclick="togglePaymentDetail('promptpay')" class="hidden">
+                                <i class="fa-solid fa-qrcode text-lg text-emerald-600"></i>
+                                <span class="text-[10px]">พร้อมเพย์ QR</span>
+                            </label>
+                            <label class="cursor-pointer border border-slate-200 rounded-xl p-2.5 flex flex-col items-center gap-1 text-center font-medium bg-slate-50 has-[:checked]:border-brand-600 has-[:checked]:bg-brand-50 has-[:checked]:text-brand-800 transition">
+                                <input type="radio" name="payment" value="cod" onclick="togglePaymentDetail('cod')" class="hidden">
+                                <i class="fa-solid fa-hand-holding-dollar text-lg text-amber-600"></i>
+                                <span class="text-[10px]">เก็บเงินปลายทาง</span>
+                            </label>
+                            <label class="cursor-pointer border border-slate-200 rounded-xl p-2.5 flex flex-col items-center gap-1 text-center font-medium bg-slate-50 has-[:checked]:border-brand-600 has-[:checked]:bg-brand-50 has-[:checked]:text-brand-800 transition">
+                                <input type="radio" name="payment" value="card" onclick="togglePaymentDetail('card')" class="hidden">
+                                <i class="fa-solid fa-credit-card text-lg text-sky-600"></i>
+                                <span class="text-[10px]">บัตรเครดิต</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- PromptPay QR Simulated Container -->
+                    <div id="pay-box-promptpay" class="bg-emerald-50/80 border border-emerald-200 rounded-2xl p-3 flex flex-col items-center text-center">
+                        <span class="text-[10px] font-bold text-emerald-800">สแกน QR Code เพื่อชำระเงิน</span>
+                        <!-- SVG Simulated QR Code -->
+                        <div class="w-32 h-32 bg-white p-2 border border-emerald-300 rounded-xl shadow-inner my-2 flex items-center justify-center">
+                            <svg class="w-full h-full text-slate-800" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm9-2h8v8h-8V2zm2 2v4h4V4h-4zM2 14h8v8H2v-8zm2 2v4h4v-4H4zm13-2h4v2h-4v-2zm-4 0h2v4h-2v-4zm2 4h4v4h-4v-4zm-4 2h2v2h-2v-2zm6 0h2v2h-2v-2z"/>
+                            </svg>
+                        </div>
+                        <span class="text-[11px] font-extrabold text-brand-700" id="qr-total-amount">ยอดชำระ: ฿0</span>
+                        <span class="text-[9px] text-slate-500 mt-0.5">ระบบจะตรวจสอบยอดโอนอัตโนมัติเมื่อกดยืนยัน</span>
+                    </div>
+
+                    <div id="pay-box-cod" class="hidden bg-amber-50 border border-amber-200 rounded-xl p-3 text-[11px] text-amber-900">
+                        <i class="fa-solid fa-circle-info text-amber-600 mr-1"></i> ชำระเงินสดกับเจ้าหน้าที่จัดส่งเมื่อได้รับสินค้า
+                    </div>
+
+                    <div id="pay-box-card" class="hidden bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col gap-2">
+                        <input type="text" placeholder="หมายเลขบัตร 16 หลัก" class="w-full p-2 border border-slate-200 rounded-lg text-xs">
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="text" placeholder="MM/YY" class="p-2 border border-slate-200 rounded-lg text-xs">
+                            <input type="password" placeholder="CVV" class="p-2 border border-slate-200 rounded-lg text-xs">
+                        </div>
+                    </div>
+
+                    <div class="border-t border-slate-100 pt-3 flex items-center justify-between text-sm">
+                        <span class="font-bold text-slate-700">ยอดชำระสุทธิ:</span>
+                        <span id="checkout-grand-total" class="font-black text-brand-700 text-lg">฿0</span>
+                    </div>
+
+                    <button type="submit" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-xs shadow-md active:scale-95 transition flex items-center justify-center gap-1.5 mt-1">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>ยืนยันการสั่งซื้อ</span>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+
+        <!-- ORDER SUCCESS CONFIRMATION MODAL -->
+        <div id="success-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+            <div class="bg-white rounded-3xl p-6 w-full max-w-sm text-center flex flex-col items-center gap-3 shadow-2xl">
+                <div class="w-16 h-16 bg-emerald-100 text-brand-600 rounded-full flex items-center justify-center text-3xl mb-1 animate-bounce">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-800">สั่งซื้อสำเร็จเรียบร้อย!</h3>
+                <p class="text-xs text-slate-500 leading-relaxed">ขอบคุณที่เลือกซื้อสินค้ากับ Green Corner เรากำลังเตรียมจัดส่งสินค้าให้คุณโดยเร็วที่สุด</p>
+                
+                <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3 w-full text-left text-xs my-1">
+                    <div class="flex justify-between text-slate-500 mb-1">
+                        <span>หมายเลขคำสั่งซื้อ:</span>
+                        <span id="success-order-id" class="font-bold text-slate-800">#GC-8921</span>
+                    </div>
+                    <div class="flex justify-between text-slate-500">
+                        <span>สถานะ:</span>
+                        <span class="font-bold text-emerald-600">กำลังเตรียมจัดส่ง</span>
+                    </div>
+                </div>
+
+                <button onclick="closeSuccessModal()" class="w-full py-2.5 bg-brand-600 text-white font-bold rounded-xl text-xs shadow-md active:scale-95 transition">
+                    กลับสู่หน้าหลัก
+                </button>
+            </div>
+        </div>
+
+        <!-- TOAST NOTIFICATION -->
+        <div id="toast" class="absolute top-16 left-1/2 -translate-x-1/2 bg-slate-900/95 text-white text-xs px-4 py-2.5 rounded-full shadow-2xl z-50 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-2 border border-slate-700/50">
+            <i id="toast-icon" class="fa-solid fa-circle-check text-brand-400"></i>
+            <span id="toast-text">ข้อความ</span>
+        </div>
+
+        <!-- BOTTOM NAVIGATION BAR -->
+        <nav class="bg-white border-t border-slate-200 py-2 px-3 flex items-center justify-around sticky bottom-0 z-30 shrink-0">
+            <button onclick="switchTab('home')" id="nav-btn-home" class="flex flex-col items-center text-brand-600 transition">
+                <i class="fa-solid fa-house text-base"></i>
+                <span class="text-[10px] font-medium mt-0.5">หน้าหลัก</span>
+            </button>
+            <button onclick="switchTab('shop')" id="nav-btn-shop" class="flex flex-col items-center text-slate-400 hover:text-brand-600 transition">
+                <i class="fa-solid fa-store text-base"></i>
+                <span class="text-[10px] font-medium mt-0.5">ร้านค้า</span>
+            </button>
+            <button onclick="switchTab('wishlist')" id="nav-btn-wishlist" class="flex flex-col items-center text-slate-400 hover:text-brand-600 transition relative">
+                <i class="fa-solid fa-heart text-base"></i>
+                <span class="text-[10px] font-medium mt-0.5">ถูกใจ</span>
+                <span id="nav-wishlist-badge" class="hidden absolute top-0 right-3 bg-rose-500 text-white text-[9px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center">0</span>
+            </button>
+            <button onclick="switchTab('orders')" id="nav-btn-orders" class="flex flex-col items-center text-slate-400 hover:text-brand-600 transition">
+                <i class="fa-solid fa-clipboard-list text-base"></i>
+                <span class="text-[10px] font-medium mt-0.5">คำสั่งซื้อ</span>
+            </button>
+        </nav>
+
+    </div>
+
+    <!-- APPLICATION LOGIC CODE -->
+    <script>
+        // DEFAULT SEED CATALOG DATA
+        const defaultCatalogProducts = [
+            {
+                id: 101,
+                name: 'กระถางดินเผามินิมอล 6 นิ้ว',
+                price: 150,
+                category: 'pots',
+                categoryLabel: 'ร้านกระถาง',
+                subtags: ['ดินเผา', 'เลี้ยงง่าย'],
+                featured: true,
+                image: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80',
+                desc: 'กระถางดินเผาเผาอุณหภูมิสูง ระบายอากาศและระบายน้ำได้ยอดเยี่ยม ช่วยป้องกันปัญหารากเน่า',
+                potSize: '6 นิ้ว (ทรงเตี้ย)',
+                drainage: 'มีรูระบายน้ำพร้อมจานรอง'
+            },
+            {
+                id: 102,
+                name: 'กระถางเซรามิกมินิมอลสีขาว',
+                price: 290,
+                category: 'pots',
+                categoryLabel: 'ร้านกระถาง',
+                subtags: ['เซรามิก'],
+                featured: true,
+                image: 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=600&q=80',
+                desc: 'กระถางเซรามิกเกรดพรีเมียม เคลือบเงาสีขาวสะอาดตา สไตล์สแกนดิเนเวียน เหมาะวางโต๊ะทำงาน',
+                potSize: '5.5 นิ้ว',
+                drainage: 'มีรูระบายน้ำ + จานรองเซรามิก'
+            },
+            {
+                id: 103,
+                name: 'กระถางปูนนู้ด Loft Style',
+                price: 220,
+                category: 'pots',
+                categoryLabel: 'ร้านกระถาง',
+                subtags: ['โมเดิร์น'],
+                featured: false,
+                image: 'https://images.unsplash.com/photo-1509937528035-ad76254b0356?auto=format&fit=crop&w=600&q=80',
+                desc: 'กระถางปูนหล่อเปลือยสไตล์ลอฟท์ แข็งแรง ทนแดดทนฝน เหมาะวางทั้งในและนอกอาคาร',
+                potSize: '8 นิ้ว',
+                drainage: 'มีรูระบายน้ำกว้าง'
+            },
+            {
+                id: 104,
+                name: 'กระถางเซรามิกทรงสูงลายหินอ่อน',
+                price: 340,
+                category: 'pots',
+                categoryLabel: 'ร้านกระถาง',
+                subtags: ['เซรามิก'],
+                featured: false,
+                image: 'https://images.unsplash.com/photo-1592417817098-8f3d6eb231fc?auto=format&fit=crop&w=600&q=80',
+                desc: 'กระถางลายหินอ่อนหรูหรา เพิ่มความพรีเมียมให้ต้นไม้ต้นโปรดของคุณ',
+                potSize: '7 นิ้ว (ทรงสูง)',
+                drainage: 'มีรูระบายน้ำ'
+            },
+            {
+                id: 201,
+                name: 'มอนสเตอร่า ดักฝุ่น (Monstera)',
+                price: 450,
+                category: 'plants',
+                categoryLabel: 'ร้านต้นไม้',
+                subtags: ['ฟอกอากาศ', 'ไม้มงคล'],
+                featured: true,
+                image: 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=600&q=80',
+                desc: 'ราชินีแห่งใบไม้ ไม้ประดับฟอกอากาศยอดฮิต ใบมีรอยแฉกสวยงามเป็นเอกลักษณ์',
+                care: { sun: 'แดดรำไร 50%', water: '2-3 วัน/ครั้ง', soil: 'โปร่ง ระบายน้ำดี' }
+            },
+            {
+                id: 202,
+                name: 'ยางอินเดียสีเข้ม (Rubber Plant)',
+                price: 390,
+                category: 'plants',
+                categoryLabel: 'ร้านต้นไม้',
+                subtags: ['ฟอกอากาศ', 'เลี้ยงง่าย'],
+                featured: true,
+                image: 'https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80',
+                desc: 'ต้นไม้มงคลใบสีเขียวเข้มเงางาม ช่วยดักจับฝุ่น PM2.5 และฟอกอากาศในห้องนอนได้ดีเยี่ยม',
+                care: { sun: 'แสงแดดปานกลาง', water: '3-4 วัน/ครั้ง', soil: 'ผสมกาบพร้าว' }
+            },
+            {
+                id: 203,
+                name: 'กวักมรกตใบเงา (Zamioculcas)',
+                price: 250,
+                category: 'plants',
+                categoryLabel: 'ร้านต้นไม้',
+                subtags: ['ไม้มงคล', 'เลี้ยงง่าย'],
+                featured: false,
+                image: 'https://images.unsplash.com/photo-1637967886160-fd78dc3ce3f5?auto=format&fit=crop&w=600&q=80',
+                desc: 'ไม้มงคลเรียกทรัพย์ ดูแลรักษาง่ายมาก ทนทาน ไม่ต้องการน้ำบ่อย เหมาะสำหรับมือใหม่',
+                care: { sun: 'รำไร ถึง ร่ม', water: '7 วัน/ครั้ง', soil: 'โปร่งแห้งง่าย' }
+            },
+            {
+                id: 204,
+                name: 'ลิ้นมังกรเขียว (Sansevieria)',
+                price: 190,
+                category: 'plants',
+                categoryLabel: 'ร้านต้นไม้',
+                subtags: ['ฟอกอากาศ', 'เลี้ยงง่าย'],
+                featured: false,
+                image: 'https://images.unsplash.com/photo-1593482892290-f54927ae1bf6?auto=format&fit=crop&w=600&q=80',
+                desc: 'ไม้ฟอกอากาศที่ปล่อยออกซิเจนในตอนกลางคืน ช่วยให้นอนหลับสบาย ทนทานสูงมาก',
+                care: { sun: 'ทนทุกสภาพแสง', water: '5-7 วัน/ครั้ง', soil: 'ร่วนปนทราย' }
+            },
+            {
+                id: 301,
+                name: 'ดินปลูกต้นไม้สูตรผสมออร์แกนิก 5kg',
+                price: 90,
+                category: 'tools',
+                categoryLabel: 'ปุ๋ย & อุปกรณ์',
+                subtags: ['เลี้ยงง่าย'],
+                featured: false,
+                image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=600&q=80',
+                desc: 'ดินผสมใบก้ามปู เพอร์ไลต์ และปุ๋ยคอกหมัก พร้อมใช้งานสำหรับไม้ใบและไม้ประดับ'
+            },
+            {
+                id: 302,
+                name: 'ฟ็อกกี้ฉีดน้ำละอองฝอยมินิมอล',
+                price: 120,
+                category: 'tools',
+                categoryLabel: 'ปุ๋ย & อุปกรณ์',
+                subtags: ['โมเดิร์น'],
+                featured: false,
+                image: 'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=600&q=80',
+                desc: 'กระบอกฉีดน้ำแรงดัน ละอองน้ำฝอยละเอียด ไม่ทำให้ใบไม้บอบช้ำ'
+            },
+            {
+                id: 401,
+                name: 'ชุดเซ็ต มอนสเตอร่า + กระถางเซรามิก',
+                price: 690,
+                category: 'sets',
+                categoryLabel: 'ชุดเซ็ตสุดคุ้ม',
+                subtags: ['ฟอกอากาศ', 'เซรามิก'],
+                featured: true,
+                image: 'https://images.unsplash.com/photo-1463936575829-25148e1db1b8?auto=format&fit=crop&w=600&q=80',
+                desc: 'จับคู่สุดคุ้ม! ต้นมอนสเตอร่าสมบูรณ์ พร้อมกระถางเซรามิกขาว และดินปลูกออร์แกนิก',
+                care: { sun: 'แดดรำไร', water: '2-3 วัน/ครั้ง', soil: 'พร้อมปลูก' }
+            }
+        ];
+
+        // LOAD FROM LOCALSTORAGE OR USE DEFAULT
+        let catalogProducts = loadProductsFromStorage();
+
+        function loadProductsFromStorage() {
+            try {
+                const stored = localStorage.getItem('greencorner_products');
+                if(stored) {
+                    return JSON.parse(stored);
+                }
+            } catch(e) {
+                console.error('LocalStorage load failed', e);
+            }
+            return [...defaultCatalogProducts];
+        }
+
+        function saveProductsToStorage() {
+            try {
+                localStorage.setItem('greencorner_products', JSON.stringify(catalogProducts));
+            } catch(e) {
+                console.error('LocalStorage save failed', e);
+            }
+        }
+
+        // GLOBAL APPLICATION STATE
+        let activeTab = 'home';
+        let currentCategoryFilter = 'all';
+        let activeSubtagFilter = null;
+        let wishlistIds = new Set([201, 102]); // Pre-filled default favorites
+        let cartItems = [
+            { id: 201, qty: 1 },
+            { id: 101, qty: 1 }
+        ];
+        let orderHistory = [];
+        let activeModalProduct = null;
+
+        // INITIALIZATION
+        window.onload = function() {
+            renderFeaturedItems();
+            applyFilters();
+            updateWishlistUI();
+            updateCartUI();
+        };
+
+        // NAVIGATION TAB SWITCHING
+        function switchTab(tabName) {
+            activeTab = tabName;
+            
+            // Hide all tabs
+            document.getElementById('screen-home').classList.add('hidden');
+            document.getElementById('screen-shop').classList.add('hidden');
+            document.getElementById('screen-wishlist').classList.add('hidden');
+            document.getElementById('screen-orders').classList.add('hidden');
+            document.getElementById('back-btn').classList.add('hidden');
+
+            // Reset navigation styles
+            const navBtns = ['home', 'shop', 'wishlist', 'orders'];
+            navBtns.forEach(btn => {
+                const el = document.getElementById(`nav-btn-${btn}`);
+                if(el) {
+                    el.classList.remove('text-brand-600');
+                    el.classList.add('text-slate-400');
+                }
+            });
+
+            // Activate chosen tab
+            const targetNav = document.getElementById(`nav-btn-${tabName}`);
+            if(targetNav) {
+                targetNav.classList.remove('text-slate-400');
+                targetNav.classList.add('text-brand-600');
+            }
+
+            const headerTitle = document.getElementById('header-title');
+            const headerSub = document.getElementById('header-subtitle');
+
+            if(tabName === 'home') {
+                document.getElementById('screen-home').classList.remove('hidden');
+                headerTitle.innerHTML = `<span>Green Corner</span> <span class="text-[10px] bg-emerald-500/30 border border-emerald-300/30 px-2 py-0.5 rounded-full font-normal">v2.0</span>`;
+                headerSub.textContent = 'ร้านกระถางและต้นไม้ออนไลน์';
+            } else if(tabName === 'shop') {
+                document.getElementById('screen-shop').classList.remove('hidden');
+                headerTitle.textContent = 'ร้านค้าทั้งหมด';
+                headerSub.textContent = 'เลือกชมสินค้ากระถางและต้นไม้';
+                document.getElementById('back-btn').classList.remove('hidden');
+            } else if(tabName === 'wishlist') {
+                document.getElementById('screen-wishlist').classList.remove('hidden');
+                headerTitle.textContent = 'รายการถูกใจ';
+                headerSub.textContent = 'สินค้าที่คุณบันทึกไว้';
+                document.getElementById('back-btn').classList.remove('hidden');
+                renderWishlist();
+            } else if(tabName === 'orders') {
+                document.getElementById('screen-orders').classList.remove('hidden');
+                headerTitle.textContent = 'ประวัติคำสั่งซื้อ';
+                headerSub.textContent = 'รายการที่คุณเคยสั่งซื้อ';
+                document.getElementById('back-btn').classList.remove('hidden');
+                renderOrders();
+            }
+        }
+
+        function goToHome() {
+            switchTab('home');
+        }
+
+        function openCategoryView(categoryKey) {
+            setMainCategoryPill(categoryKey);
+            switchTab('shop');
+        }
+
+        // FEATURED HOME ITEMS
+        function renderFeaturedItems() {
+            const featuredGrid = document.getElementById('home-featured-grid');
+            featuredGrid.innerHTML = '';
+            
+            const featuredList = catalogProducts.filter(p => p.featured);
+            featuredList.forEach(product => {
+                featuredGrid.appendChild(createProductCardHTML(product));
+            });
+        }
+
+        // PRODUCT CARD GENERATOR
+        function createProductCardHTML(product) {
+            const isLiked = wishlistIds.has(product.id);
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-slate-200/80 flex flex-col justify-between transition duration-300 relative group';
+            
+            // Fallback Image handling
+            const defaultImg = product.category === 'pots' 
+                ? 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80'
+                : 'https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80';
+
+            card.innerHTML = `
+                <div class="relative h-36 bg-slate-100 overflow-hidden cursor-pointer" onclick="openModal(${product.id})">
+                    <img src="${product.image || defaultImg}" onerror="this.src='${defaultImg}'" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute top-2 left-2 bg-slate-900/60 backdrop-blur-md text-white text-[9px] font-medium px-2 py-0.5 rounded-md">
+                        ${product.categoryLabel}
+                    </span>
+                    <button onclick="event.stopPropagation(); toggleFavorite(${product.id})" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-slate-400 flex items-center justify-center shadow transition active:scale-90">
+                        <i class="fa-solid fa-heart ${isLiked ? 'text-rose-500' : 'text-slate-300'} text-xs"></i>
+                    </button>
+                    <button onclick="event.stopPropagation(); openEditProductModal(${product.id})" class="absolute bottom-2 right-2 w-7 h-7 rounded-full bg-slate-900/70 hover:bg-slate-900 text-white flex items-center justify-center shadow transition active:scale-90 text-[10px]" title="แก้ไข">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                </div>
+                <div class="p-3 flex flex-col flex-1 justify-between">
+                    <div class="cursor-pointer" onclick="openModal(${product.id})">
+                        <h4 class="font-bold text-slate-800 text-xs line-clamp-1 group-hover:text-brand-600 transition">${product.name}</h4>
+                        <p class="text-[10px] text-slate-400 mt-0.5 line-clamp-1">${product.desc}</p>
+                    </div>
+                    <div class="mt-2.5 flex items-center justify-between">
+                        <span class="text-xs font-black text-brand-700">฿${product.price}</span>
+                        <button onclick="addToCart(${product.id})" class="w-7 h-7 rounded-xl bg-brand-50 hover:bg-brand-600 text-brand-600 hover:text-white flex items-center justify-center text-xs active:scale-95 transition shadow-sm">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        // CATALOG FILTER & SEARCH SYSTEM
+        function setMainCategoryPill(catKey) {
+            currentCategoryFilter = catKey;
+
+            // Reset pill styles
+            ['all', 'pots', 'plants', 'tools', 'sets'].forEach(k => {
+                const btn = document.getElementById(`cat-pill-${k}`);
+                if(btn) {
+                    btn.className = 'px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition bg-white text-slate-600 border border-slate-200 hover:bg-slate-100';
+                }
+            });
+
+            const activeBtn = document.getElementById(`cat-pill-${catKey}`);
+            if(activeBtn) {
+                activeBtn.className = 'px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition bg-brand-700 text-white shadow-sm';
+            }
+
+            applyFilters();
+        }
+
+        function toggleSubtag(tag) {
+            if(activeSubtagFilter === tag) {
+                activeSubtagFilter = null;
+            } else {
+                activeSubtagFilter = tag;
+            }
+
+            const bar = document.getElementById('subtag-bar');
+            const label = document.getElementById('subtag-label');
+            if(activeSubtagFilter) {
+                label.textContent = `กรองตาม: ${activeSubtagFilter}`;
+                bar.classList.remove('hidden');
+                bar.classList.add('flex');
+            } else {
+                bar.classList.add('hidden');
+                bar.classList.remove('flex');
+            }
+
+            // Update subtag button styles in filter drawer
+            document.querySelectorAll('.subtag-btn').forEach(btn => {
+                if(btn.textContent.trim() === activeSubtagFilter) {
+                    btn.classList.add('bg-brand-600', 'text-white');
+                    btn.classList.remove('text-slate-600');
+                } else {
+                    btn.classList.remove('bg-brand-600', 'text-white');
+                    btn.classList.add('text-slate-600');
+                }
+            });
+
+            applyFilters();
+        }
+
+        function clearSubtagFilter() {
+            activeSubtagFilter = null;
+            document.getElementById('subtag-bar').classList.add('hidden');
+            document.getElementById('subtag-bar').classList.remove('flex');
+            applyFilters();
+        }
+
+        function clearSearch() {
+            const input = document.getElementById('search-input');
+            input.value = '';
+            document.getElementById('clear-search-btn').classList.add('hidden');
+            applyFilters();
+        }
+
+        function resetAllFilters() {
+            currentCategoryFilter = 'all';
+            activeSubtagFilter = null;
+            document.getElementById('search-input').value = '';
+            document.getElementById('sort-select').value = 'default';
+            document.getElementById('clear-search-btn').classList.add('hidden');
+            document.getElementById('subtag-bar').classList.add('hidden');
+            document.getElementById('subtag-bar').classList.remove('flex');
+            setMainCategoryPill('all');
+        }
+
+        function applyFilters() {
+            const query = (document.getElementById('search-input').value || '').toLowerCase().trim();
+            const sortMode = document.getElementById('sort-select').value;
+            const clearBtn = document.getElementById('clear-search-btn');
+
+            if(query) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+
+            let filtered = catalogProducts.filter(item => {
+                const matchCategory = currentCategoryFilter === 'all' || item.category === currentCategoryFilter;
+                const matchQuery = !query || item.name.toLowerCase().includes(query) || item.desc.toLowerCase().includes(query) || (item.subtags && item.subtags.some(t => t.toLowerCase().includes(query)));
+                const matchSubtag = !activeSubtagFilter || (item.subtags && item.subtags.includes(activeSubtagFilter));
+                return matchCategory && matchQuery && matchSubtag;
+            });
+
+            // Sorting
+            if(sortMode === 'price-low') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if(sortMode === 'price-high') {
+                filtered.sort((a, b) => b.price - a.price);
+            } else if(sortMode === 'name') {
+                filtered.sort((a, b) => a.name.localeCompare(b.name, 'th'));
+            }
+
+            renderCatalogGrid(filtered);
+        }
+
+        function renderCatalogGrid(items) {
+            const grid = document.getElementById('product-grid');
+            const emptyState = document.getElementById('empty-state');
+            grid.innerHTML = '';
+
+            if(items.length === 0) {
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                items.forEach(product => {
+                    grid.appendChild(createProductCardHTML(product));
+                });
+            }
+        }
+
+        // WISHLIST LOGIC
+        function toggleFavorite(productId) {
+            if(wishlistIds.has(productId)) {
+                wishlistIds.delete(productId);
+                showToast('ลบออกจากรายการถูกใจแล้ว', 'fa-heart-crack', 'text-slate-400');
+            } else {
+                wishlistIds.add(productId);
+                showToast('เพิ่มในรายการถูกใจเรียบร้อย!', 'fa-heart', 'text-rose-500');
+            }
+            updateWishlistUI();
+            if(activeTab === 'shop') applyFilters();
+            if(activeTab === 'home') renderFeaturedItems();
+            if(activeTab === 'wishlist') renderWishlist();
+        }
+
+        function toggleFavoriteFromModal() {
+            if(activeModalProduct) {
+                toggleFavorite(activeModalProduct.id);
+                updateModalWishlistBtn();
+            }
+        }
+
+        function updateModalWishlistBtn() {
+            if(!activeModalProduct) return;
+            const isLiked = wishlistIds.has(activeModalProduct.id);
+            const btn = document.getElementById('modal-wishlist-btn');
+            if(isLiked) {
+                btn.className = 'absolute top-4 left-4 w-9 h-9 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center shadow hover:scale-105 transition active:scale-90';
+            } else {
+                btn.className = 'absolute top-4 left-4 w-9 h-9 rounded-full bg-white/90 text-slate-400 flex items-center justify-center shadow hover:scale-105 transition active:scale-90';
+            }
+        }
+
+        function updateWishlistUI() {
+            const count = wishlistIds.size;
+            const badge = document.getElementById('nav-wishlist-badge');
+            const label = document.getElementById('wishlist-count-label');
+
+            if(label) label.textContent = `${count} รายการ`;
+
+            if(count > 0) {
+                badge.textContent = count;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function renderWishlist() {
+            const grid = document.getElementById('wishlist-grid');
+            const empty = document.getElementById('empty-wishlist');
+            grid.innerHTML = '';
+
+            const likedProducts = catalogProducts.filter(p => wishlistIds.has(p.id));
+
+            if(likedProducts.length === 0) {
+                empty.classList.remove('hidden');
+            } else {
+                empty.classList.add('hidden');
+                likedProducts.forEach(product => {
+                    grid.appendChild(createProductCardHTML(product));
+                });
+            }
+        }
+
+        // DYNAMIC PRODUCT CREATION & EDITING MANAGEMENT
+        function getCategoryLabel(catKey) {
+            const map = {
+                'pots': 'ร้านกระถาง',
+                'plants': 'ร้านต้นไม้',
+                'tools': 'ปุ๋ย & อุปกรณ์',
+                'sets': 'ชุดเซ็ตสุดคุ้ม'
+            };
+            return map[catKey] || 'ทั่วไป';
+        }
+
+        function toggleFormCategoryFields() {
+            const cat = document.getElementById('form-category').value;
+            const plantSec = document.getElementById('form-plant-care-section');
+            const potSec = document.getElementById('form-pot-spec-section');
+
+            if(cat === 'plants' || cat === 'sets') {
+                plantSec.classList.remove('hidden');
+                potSec.classList.add('hidden');
+            } else if(cat === 'pots') {
+                potSec.classList.remove('hidden');
+                plantSec.classList.add('hidden');
+            } else {
+                plantSec.classList.add('hidden');
+                potSec.classList.add('hidden');
+            }
+        }
+
+        function openAddProductModal() {
+            document.getElementById('form-modal-title').innerHTML = `<i class="fa-solid fa-plus-circle text-brand-600"></i> เพิ่มสินค้าใหม่ในร้าน`;
+            document.getElementById('product-form').reset();
+            document.getElementById('form-product-id').value = '';
+            toggleFormCategoryFields();
+
+            const modal = document.getElementById('product-form-modal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.remove('translate-y-full');
+        }
+
+        function openEditProductModal(productId) {
+            const prod = catalogProducts.find(p => p.id === productId);
+            if(!prod) return;
+
+            document.getElementById('form-modal-title').innerHTML = `<i class="fa-solid fa-pen-to-square text-brand-600"></i> แก้ไขข้อมูลสินค้า`;
+            document.getElementById('form-product-id').value = prod.id;
+            document.getElementById('form-name').value = prod.name;
+            document.getElementById('form-category').value = prod.category;
+            document.getElementById('form-price').value = prod.price;
+            document.getElementById('form-image').value = prod.image || '';
+            document.getElementById('form-desc').value = prod.desc || '';
+            document.getElementById('form-subtags').value = prod.subtags ? prod.subtags.join(', ') : '';
+
+            toggleFormCategoryFields();
+
+            if(prod.care) {
+                document.getElementById('form-care-sun').value = prod.care.sun || '';
+                document.getElementById('form-care-water').value = prod.care.water || '';
+                document.getElementById('form-care-soil').value = prod.care.soil || '';
+            }
+            if(prod.potSize) {
+                document.getElementById('form-pot-size').value = prod.potSize || '';
+                document.getElementById('form-pot-drain').value = prod.drainage || '';
+            }
+
+            const modal = document.getElementById('product-form-modal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.remove('translate-y-full');
+        }
+
+        function closeProductFormModal() {
+            const modal = document.getElementById('product-form-modal');
+            modal.querySelector('div').classList.add('translate-y-full');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        function handleSaveProduct(e) {
+            e.preventDefault();
+            const editId = document.getElementById('form-product-id').value;
+            const name = document.getElementById('form-name').value.trim();
+            const category = document.getElementById('form-category').value;
+            const price = parseFloat(document.getElementById('form-price').value);
+            const image = document.getElementById('form-image').value.trim();
+            const desc = document.getElementById('form-desc').value.trim();
+            const subtagsRaw = document.getElementById('form-subtags').value.trim();
+
+            const subtags = subtagsRaw ? subtagsRaw.split(',').map(s => s.trim()).filter(Boolean) : ['ทั่วไป'];
+
+            let productData = {
+                name,
+                category,
+                categoryLabel: getCategoryLabel(category),
+                price,
+                image: image || (category === 'pots' 
+                    ? 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80'
+                    : 'https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80'),
+                desc,
+                subtags,
+                featured: true
+            };
+
+            if(category === 'plants' || category === 'sets') {
+                productData.care = {
+                    sun: document.getElementById('form-care-sun').value.trim() || 'แดดรำไร',
+                    water: document.getElementById('form-care-water').value.trim() || '2-3 วัน/ครั้ง',
+                    soil: document.getElementById('form-care-soil').value.trim() || 'โปร่ง ระบายน้ำดี'
+                };
+            } else if(category === 'pots') {
+                productData.potSize = document.getElementById('form-pot-size').value.trim() || '6 นิ้ว';
+                productData.drainage = document.getElementById('form-pot-drain').value.trim() || 'มีรูระบายน้ำ';
+            }
+
+            if(editId) {
+                // UPDATE EXISTING PRODUCT
+                const index = catalogProducts.findIndex(p => p.id === parseInt(editId));
+                if(index > -1) {
+                    catalogProducts[index] = { ...catalogProducts[index], ...productData };
+                    showToast('แก้ไขข้อมูลสินค้าเรียบร้อย', 'fa-circle-check', 'text-emerald-400');
+                }
+            } else {
+                // CREATE NEW PRODUCT
+                productData.id = Date.now();
+                catalogProducts.unshift(productData);
+                showToast('เพิ่มสินค้าใหม่สำเร็จ!', 'fa-plus-circle', 'text-brand-400');
+            }
+
+            saveProductsToStorage();
+            closeProductFormModal();
+            renderFeaturedItems();
+            applyFilters();
+        }
+
+        function confirmDeleteCurrentModal() {
+            if(!activeModalProduct) return;
+            const prodName = activeModalProduct.name;
+            const prodId = activeModalProduct.id;
+
+            if(confirm(`คุณต้องการลบ "${prodName}" ออกจากระบบหรือไม่?`)) {
+                deleteProduct(prodId);
+                closeModal();
+            }
+        }
+
+        function deleteProduct(productId) {
+            catalogProducts = catalogProducts.filter(p => p.id !== productId);
+            wishlistIds.delete(productId);
+            cartItems = cartItems.filter(i => i.id !== productId);
+
+            saveProductsToStorage();
+            updateWishlistUI();
+            updateCartUI();
+            renderFeaturedItems();
+            applyFilters();
+            showToast('ลบสินค้าออกจากระบบแล้ว', 'fa-trash-can', 'text-rose-400');
+        }
+
+        // ITEM DETAIL MODAL
+        function openModal(productId) {
+            const product = catalogProducts.find(p => p.id === productId);
+            if(!product) return;
+            activeModalProduct = product;
+
+            const defaultImg = product.category === 'pots' 
+                ? 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80'
+                : 'https://images.unsplash.com/photo-1545241047-6083a3684587?auto=format&fit=crop&w=600&q=80';
+
+            const modalImg = document.getElementById('modal-img');
+            modalImg.src = product.image || defaultImg;
+            modalImg.onerror = () => { modalImg.src = defaultImg; };
+
+            document.getElementById('modal-title').textContent = product.name;
+            document.getElementById('modal-price').textContent = `฿${product.price}`;
+            document.getElementById('modal-desc').textContent = product.desc;
+            document.getElementById('modal-tag').textContent = product.categoryLabel;
+
+            // Care guide logic
+            const careGuide = document.getElementById('modal-care-guide');
+            const potSpec = document.getElementById('modal-pot-spec');
+
+            if(product.care) {
+                careGuide.classList.remove('hidden');
+                document.getElementById('care-sun').textContent = product.care.sun;
+                document.getElementById('care-water').textContent = product.care.water;
+                document.getElementById('care-soil').textContent = product.care.soil;
+            } else {
+                careGuide.classList.add('hidden');
+            }
+
+            if(product.potSize) {
+                potSpec.classList.remove('hidden');
+                document.getElementById('pot-size').textContent = `ขนาด: ${product.potSize}`;
+                document.getElementById('pot-drain').textContent = product.drainage || 'มีรูระบายน้ำ';
+            } else {
+                potSpec.classList.add('hidden');
+            }
+
+            updateModalWishlistBtn();
+
+            const modal = document.getElementById('detail-modal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.remove('translate-y-full');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('detail-modal');
+            modal.querySelector('div').classList.add('translate-y-full');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            activeModalProduct = null;
+        }
+
+        function addToCartCurrentModal() {
+            if(activeModalProduct) {
+                addToCart(activeModalProduct.id);
+                closeModal();
+            }
+        }
+
+        // CART & CHECKOUT MANAGEMENT
+        function addToCart(productId) {
+            const existing = cartItems.find(item => item.id === productId);
+            if(existing) {
+                existing.qty += 1;
+            } else {
+                cartItems.push({ id: productId, qty: 1 });
+            }
+            updateCartUI();
+            showToast('เพิ่มสินค้าลงในตะกร้าแล้ว!', 'fa-cart-shopping', 'text-brand-400');
+        }
+
+        function updateCartQty(productId, delta) {
+            const itemIndex = cartItems.findIndex(i => i.id === productId);
+            if(itemIndex > -1) {
+                cartItems[itemIndex].qty += delta;
+                if(cartItems[itemIndex].qty <= 0) {
+                    cartItems.splice(itemIndex, 1);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            const cartBadge = document.getElementById('cart-badge-count');
+            const totalQty = cartItems.reduce((sum, item) => sum + item.qty, 0);
+
+            if(totalQty > 0) {
+                cartBadge.textContent = totalQty;
+                cartBadge.classList.remove('hidden');
+            } else {
+                cartBadge.classList.add('hidden');
+            }
+
+            container.innerHTML = '';
+
+            if(cartItems.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12">
+                        <i class="fa-solid fa-basket-shopping text-3xl text-slate-300 mb-2"></i>
+                        <p class="text-xs text-slate-400">ยังไม่มีสินค้าในตะกร้า</p>
+                    </div>
+                `;
+            } else {
+                cartItems.forEach(cartItem => {
+                    const product = catalogProducts.find(p => p.id === cartItem.id);
+                    if(!product) return;
+
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'flex items-center gap-3 bg-slate-50 p-2.5 rounded-2xl border border-slate-200/80';
+                    itemEl.innerHTML = `
+                        <img src="${product.image}" class="w-14 h-14 object-cover rounded-xl shrink-0">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-bold text-xs text-slate-800 truncate">${product.name}</h4>
+                            <span class="text-xs font-black text-brand-700">฿${product.price}</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-white px-2 py-1 rounded-xl border border-slate-200 shadow-sm">
+                            <button onclick="updateCartQty(${product.id}, -1)" class="text-slate-400 hover:text-rose-500 text-xs font-bold w-4 h-4 flex items-center justify-center">-</button>
+                            <span class="text-xs font-bold text-slate-700 w-4 text-center">${cartItem.qty}</span>
+                            <button onclick="updateCartQty(${product.id}, 1)" class="text-slate-400 hover:text-brand-600 text-xs font-bold w-4 h-4 flex items-center justify-center">+</button>
+                        </div>
+                    `;
+                    container.appendChild(itemEl);
+                });
+            }
+
+            // Calculation
+            const subtotal = cartItems.reduce((sum, item) => {
+                const p = catalogProducts.find(prod => prod.id === item.id);
+                return sum + (p ? p.price * item.qty : 0);
+            }, 0);
+
+            const shipping = subtotal > 500 || subtotal === 0 ? 0 : 40;
+            const grandTotal = subtotal + (subtotal > 0 ? shipping : 0);
+
+            document.getElementById('cart-subtotal').textContent = `฿${subtotal}`;
+            document.getElementById('cart-shipping').textContent = shipping === 0 && subtotal > 0 ? 'ส่งฟรี' : `฿${shipping}`;
+            document.getElementById('cart-grandtotal').textContent = `฿${grandTotal}`;
+            document.getElementById('qr-total-amount').textContent = `ยอดชำระ: ฿${grandTotal}`;
+            document.getElementById('checkout-grand-total').textContent = `฿${grandTotal}`;
+        }
+
+        function toggleCartDrawer(open) {
+            const drawer = document.getElementById('cart-drawer');
+            const inner = drawer.querySelector('div');
+            if(open) {
+                drawer.classList.remove('opacity-0', 'pointer-events-none');
+                inner.classList.remove('translate-x-full');
+            } else {
+                inner.classList.add('translate-x-full');
+                drawer.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        function toggleFilterDrawer(open) {
+            const drawer = document.getElementById('filter-drawer');
+            const inner = drawer.querySelector('div');
+            if(open) {
+                drawer.classList.remove('opacity-0', 'pointer-events-none');
+                inner.classList.remove('translate-y-full');
+            } else {
+                inner.classList.add('translate-y-full');
+                drawer.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        // CHECKOUT WORKFLOW
+        function openCheckoutModal() {
+            if(cartItems.length === 0) {
+                showToast('โปรดเลือกสินค้าลงตะกร้าก่อนสั่งซื้อ', 'fa-circle-exclamation', 'text-amber-400');
+                return;
+            }
+            toggleCartDrawer(false);
+            const modal = document.getElementById('checkout-modal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.remove('translate-y-full');
+        }
+
+        function closeCheckoutModal() {
+            const modal = document.getElementById('checkout-modal');
+            modal.querySelector('div').classList.add('translate-y-full');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        function togglePaymentDetail(type) {
+            document.getElementById('pay-box-promptpay').classList.add('hidden');
+            document.getElementById('pay-box-cod').classList.add('hidden');
+            document.getElementById('pay-box-card').classList.add('hidden');
+
+            if(type === 'promptpay') document.getElementById('pay-box-promptpay').classList.remove('hidden');
+            if(type === 'cod') document.getElementById('pay-box-cod').classList.remove('hidden');
+            if(type === 'card') document.getElementById('pay-box-card').classList.remove('hidden');
+        }
+
+        function handlePlaceOrder(e) {
+            e.preventDefault();
+            const orderId = '#GC-' + Math.floor(1000 + Math.random() * 9000);
+            
+            const subtotal = cartItems.reduce((sum, item) => {
+                const p = catalogProducts.find(prod => prod.id === item.id);
+                return sum + (p ? p.price * item.qty : 0);
+            }, 0);
+            const shipping = subtotal > 500 ? 0 : 40;
+            const grandTotal = subtotal + shipping;
+
+            const order = {
+                id: orderId,
+                date: new Date().toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' }),
+                items: [...cartItems],
+                total: grandTotal,
+                status: 'กำลังเตรียมจัดส่ง'
+            };
+
+            orderHistory.unshift(order);
+            cartItems = [];
+            updateCartUI();
+
+            closeCheckoutModal();
+            
+            document.getElementById('success-order-id').textContent = orderId;
+            const successModal = document.getElementById('success-modal');
+            successModal.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function closeSuccessModal() {
+            const successModal = document.getElementById('success-modal');
+            successModal.classList.add('opacity-0', 'pointer-events-none');
+            switchTab('orders');
+        }
+
+        // RENDER ORDERS HISTORY
+        function renderOrders() {
+            const container = document.getElementById('orders-list');
+            const empty = document.getElementById('empty-orders');
+            container.innerHTML = '';
+
+            if(orderHistory.length === 0) {
+                empty.classList.remove('hidden');
+            } else {
+                empty.classList.add('hidden');
+                orderHistory.forEach(order => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm flex flex-col gap-2.5 text-xs';
+                    
+                    let itemsSummary = order.items.map(i => {
+                        const p = catalogProducts.find(prod => prod.id === i.id);
+                        return p ? `${p.name} (x${i.qty})` : '';
+                    }).join(', ');
+
+                    card.innerHTML = `
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                            <span class="font-bold text-slate-800">${order.id}</span>
+                            <span class="text-[10px] bg-emerald-100 text-emerald-800 font-semibold px-2 py-0.5 rounded-full">${order.status}</span>
+                        </div>
+                        <div class="text-slate-600 line-clamp-2">
+                            ${itemsSummary}
+                        </div>
+                        <div class="flex items-center justify-between pt-1 border-t border-slate-50 text-[11px]">
+                            <span class="text-slate-400">${order.date}</span>
+                            <span class="font-black text-brand-700 text-sm">ยอดชำระ: ฿${order.total}</span>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+        }
+
+        // TOAST NOTIFICATIONS
+        let toastTimeout;
+        function showToast(msg, icon = 'fa-circle-check', iconColor = 'text-brand-400') {
+            const toast = document.getElementById('toast');
+            const toastText = document.getElementById('toast-text');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastText.textContent = msg;
+            toastIcon.className = `fa-solid ${icon} ${iconColor}`;
+            
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 2300);
+        }
+    </script>
+</body>
+</html>
